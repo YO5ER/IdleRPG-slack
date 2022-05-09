@@ -1111,9 +1111,21 @@ sub parse {
                     IRC::privmsg("You are not logged in.", $usernick);
                 }
                 else {
-                    IRC::privmsg("You are $username, the level ".
-                        $Simulation::rps{$username}{level}." $Simulation::rps{$username}{class}. ".
-                        "Next level in ".Simulation::duration($Simulation::rps{$username}{next}),$usernick);
+                    if ($Simulation::rps{$username}{class} eq 'e'){
+                        IRC::privmsg("You are $username, the level ".
+                            $Simulation::rps{$username}{level}. "EVIL" . .
+                            "Next level in ".Simulation::duration($Simulation::rps{$username}{next}),$usernick);
+                    }
+                    elsif ($Simulation::rps{$username}{class} eq 'g'){
+                        IRC::privmsg("You are $username, the level ".
+                            $Simulation::rps{$username}{level}. "GOOD" . .
+                            "Next level in ".Simulation::duration($Simulation::rps{$username}{next}),$usernick);
+                    }
+                    else ($Simulation::rps{$username}{class} eq 'n'){
+                        IRC::privmsg("You are $username, the level ".
+                            $Simulation::rps{$username}{level}. "NEUTRAL" . .
+                            "Next level in ".Simulation::duration($Simulation::rps{$username}{next}),$usernick);
+                    }
                     my $tempsum = Equipment::itemsum($username,0);
                     IRC::privmsg("Items: ring[".($Simulation::rps{$username}{item}{ring})."], ".
                         "amulet[".($Simulation::rps{$username}{item}{amulet})."], ".
